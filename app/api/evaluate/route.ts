@@ -9,12 +9,15 @@ import { EvaluateRequest } from '@/types';
 export async function POST(request: NextRequest) {
   try {
     const body: EvaluateRequest = await request.json();
-    const { description } = body;
+    const { description, fileContent } = body;
 
-    // 验证必填字段
-    if (!description || !description.trim()) {
+    // 验证必填字段：至少要有描述或文件内容
+    const desc = description?.trim() || '';
+    const fileContentStr = fileContent?.trim() || '';
+    
+    if (!desc && !fileContentStr) {
       return NextResponse.json(
-        { error: '产品描述不能为空' },
+        { error: '请填写 App 功能描述或上传相关文件' },
         { status: 400 }
       );
     }
@@ -22,7 +25,8 @@ export async function POST(request: NextRequest) {
     // 调用通义千问 API
     const options: EvaluateRequest = {
       ...body,
-      description: description.trim(),
+      description: desc || (fileContentStr ? '（用户通过上传文件提供需求）' : ''),
+      fileContent: fileContentStr || undefined,
     };
 
     const markdown = await callOpenAI(options);

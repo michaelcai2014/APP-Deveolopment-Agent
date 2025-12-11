@@ -3,19 +3,40 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 52, 53, 65;
+  --background-rgb: 255, 255, 255;
+  --sidebar-rgb: 202, 202, 203;
+  --border-rgb: 217, 217, 227;
+  --text-primary: #353740;
+  --text-secondary: #6e6e80;
+  --accent: #10a37f;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--text-primary);
+  background: rgb(var(--background-rgb));
+  font-family: Söhne, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* GPT 风格的滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f7f7f8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d9d9e3;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c5c5d2;
 }
 
 @layer utilities {
@@ -23,5 +44,3 @@ body {
     text-wrap: balance;
   }
 }
-
-
